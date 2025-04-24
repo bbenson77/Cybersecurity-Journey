@@ -17,6 +17,8 @@ cat dns.log | less
 cat dns.log | zeek-cut qtype_name | grep "AAAA" | uniq -c
 cat conn.log | zeek-cut duration | sort -r | head -n 1
 cat dns.log | zeek-cut query |rev | cut -d '.' -f 1-2 | rev | head
+cat conn.log | zeek-cut id.orig_h | sort | uniq -c
+
 
 
 ## 📸 Screenshot Output
