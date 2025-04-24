@@ -15,12 +15,14 @@ zeek -C -r dns-tunneling.pcap
 cat dns.log | grep ":" | wc -l
 cat dns.log | less
 cat dns.log | zeek-cut qtype_name | grep "AAAA" | uniq -c
+cat conn.log | zeek-cut duration | sort -r | head -n 1
 
 
 ## 📸 Screenshot Output
 
 ![AAAA Count](./dns-aaa-count.png)
 Linked terminal screenshot to README
+
 
 
 
