@@ -13,4 +13,6 @@
 ```bash
 zeek -C -r dns-tunneling.pcap
 cat dns.log | grep ":" | wc -l
+cat dns.log | less
+cat dns.log | zeek-cut qtype_name | grep "AAAA" | uniq -c
 
