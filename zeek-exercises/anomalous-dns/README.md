@@ -17,4 +17,12 @@ cat dns.log | less
 cat dns.log | zeek-cut qtype_name | grep "AAAA" | uniq -c
 
 
+## 📸 Screenshot Output
+
+![AAAA Count](./anomalous-dns-aaaa-count.png)
+Linked terminal screenshot to README
+
+
+
+
 
