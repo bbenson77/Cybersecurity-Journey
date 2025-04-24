@@ -15,3 +15,6 @@ The case was assigned to me. Inspect the PCAP and retrieve the artefacts to conf
 zeek -Cr phishing.pcap
 cat conn.log | zeek-cut id.orig_h | sort | uniq -c
 cat http.log | zeek-cut uri host
+zeek -Cr phishing.pcap hash-demo.zeek
+cat files.log | zeek-cut mime_type md5
+
