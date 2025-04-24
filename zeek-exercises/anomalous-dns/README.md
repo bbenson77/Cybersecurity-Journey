@@ -16,3 +16,5 @@ cat dns.log | grep ":" | wc -l
 cat dns.log | less
 cat dns.log | zeek-cut qtype_name | grep "AAAA" | uniq -c
 
+
+
