@@ -12,3 +12,5 @@
 
 What I learned:
 Every Linux system has a unique ID stored at etc/machine-id
+
+![machine-id](./image.png)
