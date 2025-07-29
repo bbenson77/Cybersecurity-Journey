@@ -30,3 +30,15 @@ A suspicious user account named microservice existed, which stands out since it'
 
 What I Learned:
 The etc/passwd file contains all user accounts on a Linux system. Attackers often create new accounts for persistence, and spotting unfamiliar names like microservice can reveal backdoors.
+
+## Task 3 - Detect Malicious Cronjob
+- **Command used**:
+- ```bash
+  sudo cat /var/spool/cron/crontabs/root
+
+What I was looking for:
+I reviewed scheduled tasks under root to identify any jobs set to automatically execute malicious scripts at boot, which is a known attacker tactic for persistence.
+
+What I found:
+A suspicious cronjob set to execute /home/mircroservice/printer_app every time the machine reboots, likely tied to the mircroservice backdoor user.
+
