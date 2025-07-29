@@ -36,6 +36,8 @@ The etc/passwd file contains all user accounts on a Linux system. Attackers ofte
 - ```bash
   sudo cat /var/spool/cron/crontabs/root
 
+![cronjob-root-persistence](./cronjob-root-persistence.png)
+
 What I was looking for:
 I reviewed scheduled tasks under root to identify any jobs set to automatically execute malicious scripts at boot, which is a known attacker tactic for persistence.
 
