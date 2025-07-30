@@ -44,3 +44,20 @@ I reviewed scheduled tasks under root to identify any jobs set to automatically 
 What I found:
 A suspicious cronjob set to execute /home/mircroservice/printer_app every time the machine reboots, likely tied to the mircroservice backdoor user.
 
+## Task 4 - Identify Hidden Process
+- **Command Used**:
+- ```bash
+  ps aux | grep -E "/tmp|/dev|/home/mircroservice|\.\/|printer"
+
+![suspicious-process](./suspicious-process-strokes.png)
+
+What I was looking for:
+I scanned all active processes running from suspicious locations (like /tmp, /home/mircroservice) that might belong to a backdoor account or be disguised as a system process.
+
+What I found:
+A process named .strokes running from a hidden directory:
+/home/mircroservice/.tmp/.strokes
+
+
+
+
