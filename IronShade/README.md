@@ -84,7 +84,7 @@ Correct answer: 2
 - ```bash
   sudo ls -la /
 
-![hidden-systmdfile](./hidden-systmd-file-in-root-directory.png)
+![hidden-systmdfile](./hidden-systmd-file-in-root-dir.png)
 
 What I was looking for:
 I searched for hidden files located directly under the root of the filesystem (/) — not the /root user's home directory. These files can signal stealthy attacker implants or dropped payloads.
