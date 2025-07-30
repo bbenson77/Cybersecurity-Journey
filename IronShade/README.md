@@ -58,6 +58,26 @@ What I found:
 A process named .strokes running from a hidden directory:
 /home/mircroservice/.tmp/.strokes
 
+## Task 5 - Count Processes from Backdoor Directory
+- **Command Used**:
+- ```bash
+  ps aux | grep -E "/tmp|/dev|/home/mircroservice|\.\/|printer"
+
+![suspicious-process](./suspicious-process-strokes.png)
+
+What I was looking for:
+I searched all active processes to determine how many were running from within the backdoor user’s home directory: /home/mircroservice.
+
+What I found:
+Two suspicious processes:
+
+/home/mircroservice/.tmp/.strokes
+
+/home/mircroservice/printer_app
+
+Both were owned by root and running from a non-standard, attacker-created directory.
+
+Correct answer: 2
 
 
 
