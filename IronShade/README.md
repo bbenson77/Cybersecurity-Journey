@@ -79,5 +79,17 @@ Both were owned by root and running from a non-standard, attacker-created direct
 
 Correct answer: 2
 
+## Task 6 - Identify Hidden File from the Root (/) Directory 
+- **Command Used**:
+- ```bash
+  sudo ls -la /
+
+![hidden-systmdfile](./hidden-systmd-file-in-root-directory.png)
+
+What I was looking for:
+I searched for hidden files located directly under the root of the filesystem (/) — not the /root user's home directory. These files can signal stealthy attacker implants or dropped payloads.
+
+What I found:
+A file named .systemd, which is attempting to blend in with legitimate system services. Its location in / and hidden nature is highly suspicious.
 
 
