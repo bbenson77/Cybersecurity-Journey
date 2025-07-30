@@ -92,4 +92,27 @@ I searched for hidden files located directly under the root of the filesystem (/
 What I found:
 A file named .systemd, which is attempting to blend in with legitimate system services. Its location in / and hidden nature is highly suspicious.
 
+## Task 7 - Identify Suspicious Services 
+- **Command used**:
+- ```bash
+  ls /sys/fs/cgroup/systemd/system.slice/
+
+  
+![services-in-system](./services-in-system-slice.png)
+
+What I was looking for:
+I inspected services listed in the system.slice cgroup, which may include stealthy or manually dropped service files that don’t appear via standard systemctl listing.
+
+What I found:
+Two suspicious services:
+
+backup.service – Not a legitimate system component and likely used to disguise a backdoor.
+
+strokes.service – Matches the previously identified .strokes binary used for persistence.
+
+These services do not belong to standard Linux operations and are likely attacker-created.
+
+Correct answer: 
+backup.service, strokes.service
+
 
