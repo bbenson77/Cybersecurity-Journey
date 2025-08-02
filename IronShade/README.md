@@ -182,6 +182,37 @@ What I Learned:
 Searching it is a common forensic technique to discover post-exploitation payloads or malware masquerading as system tools.
 Anything unfamiliar (like pscanner) should raise immediate suspicion and be investigated further.
 
+## Task 12 - Find the secret code 
+- **Command Used**:
+- ```bash
+   dpkg -s pscanner
+
+![secretcode](./secretcode.png)
+
+What I was looking for:
+I wanted to inspect the metadata of the malicious package installed on the system to see if the attacker had embedded any hidden messages or flags.
+
+ What I found:
+Running the dpkg -s command on pscanner revealed metadata including:
+
+Maintainer: johnnyEng
+
+Version: 1.5
+
+Description field: Secret_code{_tRy_Hack_ME_}
+
+This is clearly a CTF-style flag or secret string hidden in the package’s description.
+
+
+
+## Results 
+
+
+
+
+
+
+
 
 
 
