@@ -143,6 +143,25 @@ The command output revealed repeated successful SSH logins to the microservice u
 
 Correct answer: 10.11.75.247
 
+## Task 10 - Count Failed SSH Logins on Backdoor Account
+- **Command Used**:
+- ```bash
+  sudo zgrep -ai "mircoservice" /var/log/auth.log* | grep -i "ssh" | grep -ia "failed"
+
+![failedssh](./failedattemptssh.png)
+
+What I was looking for:
+I wanted to identify how many failed SSH login attempts were made to the mircoservice backdoor account. Failed attempts can indicate brute-force attacks or probing by the attacker after account creation.
+
+What I found:
+A total of 8 failed login attempts were recorded for the microservice account. Some were shown as "repeated" log messages, which required me to add them manually:
+message repeated 2 times means the previous failed message happened 2 more times.
+
+Correct answer: 8
+
+
+
+
 
 
 
