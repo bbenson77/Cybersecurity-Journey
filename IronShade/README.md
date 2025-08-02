@@ -115,4 +115,17 @@ These services do not belong to standard Linux operations and are likely attacke
 Correct answer: 
 backup.service, strokes.service
 
+## Task 8 - Identify when a suspicious user (`mircroservice`) was created
+- **Command Used**:
+- ```bash
+  sudo zgrep -ai "useradd" /var/log/auth.log* | grep -i mircoservice
+
+![useradd-mircoservice](./useradd.png)
+
+What I was looking for:
+I searched the authentication logs to identify when the suspicious user mircroservice was created using the useradd command.
+
+What I found:
+On August 5 at 22:05:33, a new user named mircroservice was created. This is not a default Linux user and matches the backdoor account we identified earlier.
+
 
