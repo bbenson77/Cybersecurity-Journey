@@ -159,6 +159,30 @@ message repeated 2 times means the previous failed message happened 2 more times
 
 Correct answer: 8
 
+## Task 11 - Identify Malicious Package Installed on Host
+- **Command Used**:
+- ```bash
+  grep "install" /var/log/dpkg.log
+  
+![maliciouspackage](./maliciouspackage.png)
+
+What I Was Looking For:
+I wanted to see all installed packages on the host and identify if anything suspicious was manually installed by the attacker.
+
+What I Found:
+Among many system packages, one unusual package stood out:
+pscanner:amd64
+
+This package isn’t a standard part of any normal Ubuntu system and doesn’t appear to have been installed from a trusted repo.
+
+It was likely manually added to the system by the attacker.
+
+What I Learned:
+/var/log/dpkg.log keeps track of all packages installed using the dpkg tool or indirectly through apt.
+Searching it is a common forensic technique to discover post-exploitation payloads or malware masquerading as system tools.
+Anything unfamiliar (like pscanner) should raise immediate suspicion and be investigated further.
+
+
 
 
 
