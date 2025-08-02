@@ -128,4 +128,21 @@ I searched the authentication logs to identify when the suspicious user mircrose
 What I found:
 On August 5 at 22:05:33, a new user named mircroservice was created. This is not a default Linux user and matches the backdoor account we identified earlier.
 
+## Task 9 - Identify Remote SSH Connections to Backdoor Account
+- **Command Used**:
+- ```bash
+  sudo zgrep -ai "microservice" /var/log/auth.log* | grep -i "ssh"
+
+![sshrequets](./sshrequestsip.png)
+
+What I was looking for:
+I needed to determine which external IP address had established multiple SSH sessions to the suspicious backdoor account named microservice.
+
+What I found:
+The command output revealed repeated successful SSH logins to the microservice user from the IP address 10.11.75.247. These logins occurred across several timestamps, confirming multiple connections.
+
+Correct answer: 10.11.75.247
+
+
+
 
