@@ -12,6 +12,8 @@ Documenting my full investigation of the **initial payload execution** in the Bo
 process.parent.name: "explorer.exe"
 ```
 
+![task1](./task1.png) ![task1answer](./task1correct.png)
+
  The Struggle:
 At first, I thought the answer would obviously be:
 
