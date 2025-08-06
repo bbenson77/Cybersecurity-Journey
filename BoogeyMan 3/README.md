@@ -10,9 +10,9 @@ Documenting my full investigation of the **initial payload execution** in the Bo
 **Command / Query Used:**
 ```kql
 process.parent.name: "explorer.exe"
+```
 
-
-The Struggle:
+ The Struggle:
 At first, I thought the answer would obviously be:
 
 A PowerShell command using -enc or -c
@@ -35,6 +35,12 @@ So I went back to square one and thought:
 "What would a real attacker use to disguise a script-based payload?"
 
 That’s when I remembered mshta.exe from a previous TryHackMe room.
+
+
+
+
+
+
 
 
 
