@@ -38,6 +38,40 @@ So I went back to square one and thought:
 
 That’s when I remembered mshta.exe from a previous TryHackMe room.
 
+## Task 2 - Find the Full Command-Line Value of the Stage 1 Payload Execution
+
+**Command/Query Used:**
+```kql
+process.parent.pid: 6392
+
+```
+![task2](./Screenshots/task2.png)  ![task2answer](./Screenshots/task2correct.png)
+
+ What I Did:
+I knew from Task 1 that the process responsible for stage 1 execution was mshta.exe and its PID was 6392.
+
+To investigate what child processes it launched and how, I filtered the dataset using:
+process.parent.pid: 6392
+
+This shows any command that was directly launched by mshta.exe.
+My Reasoning:
+When I saw the TryHackMe question ask about a command "attempting to implant a file to another location," I knew it had to involve a tool like xcopy.exe, robocopy, or something used for data movement.
+
+One entry stood out: "C:\Windows\System32\xcopy.exe" /s /i /e /h D:\review.dat C:\Users\EVAN~1.HUT\AppData\Local\Temp\review.dat
+
+I recognized:
+
+xcopy.exe = used to copy files and directories
+
+/s /i /e /h = common switches attackers use for stealthy recursive file copying
+
+review.dat = suspicious, likely payload or extracted data
+
+EVAN~1.HUT = 8.3 short filename for EVAN-HUTCHINSON, showing it’s a real user profile
+
+This task taught me how to correlate a parent-child process chain in a timeline using Winlogbeat logs in Kibana. By filtering with process.parent.pid, I was able to isolate what was launched right after mshta.exe ran. This is critical in real-world malware forensics when tracking staged payload execution and lateral movement.
+
+
 
 
 
