@@ -72,6 +72,34 @@ EVAN~1.HUT = 8.3 short filename for EVAN-HUTCHINSON, showing it’s a real user 
 This task taught me how to correlate a parent-child process chain in a timeline using Winlogbeat logs in Kibana. By filtering with process.parent.pid, I was able to isolate what was launched right after mshta.exe ran. This is critical in real-world malware forensics when tracking staged payload execution and lateral movement.
 
 
+## Task 3 - Execution of the Implanted File
+
+**Command / Query Used:**
+```kql
+process.name: "rundll32.exe" AND process.command_line: "*review.dat*"
+
+```
+![task3](./Screenshots/task3.png)  ![task3answer](./Screenshots/task3correct.png)
+
+ What I Did:
+From Task 2, I knew the malicious .dat file was implanted at:
+C:\Users\EVAN~1.HUT\AppData\Local\Temp\review.dat
+
+The question hinted at the execution format:
+**\******\********\******** /*/*/*/*.*
+which matches the typical syntax for running a DLL/implant with rundll32.exe.
+
+My Reasoning:
+Attackers often execute malicious DLL-like payloads using rundll32.exe with an export function, e.g.:
+rundll32.exe payload.dll,DllRegisterServer
+
+The .dat file from Task 2 was likely a renamed DLL.
+Filtering for process.name: "rundll32.exe" and matching review.dat in the command_line field would reveal the execution event.
+
+
+
+
+
 
 
 
