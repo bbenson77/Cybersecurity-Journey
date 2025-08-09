@@ -96,6 +96,30 @@ rundll32.exe payload.dll,DllRegisterServer
 The .dat file from Task 2 was likely a renamed DLL.
 Filtering for process.name: "rundll32.exe" and matching review.dat in the command_line field would reveal the execution event.
 
+## Task 4 – Scheduled Task (Persistence) Name
+
+**Command / Query Used**
+```kql
+"ProjectFinancialSummary_Q3"
+```
+
+![task4](./Screenshots/task4.png)  ![task4answer](./Screenshots/task4correct.png)
+
+Breakdown
+This rare string appears in:
+mshta.exe opening the HTA from the ISO
+xcopy.exe copying review.dat
+rundll32.exe executing review.dat,DllRegisterServer
+powershell.exe creating a scheduled task via Register-ScheduledTask
+
+What I looked at
+Added the columns: @timestamp, process.name, process.command_line, process.parent.executable, host.hostname.
+Sorted ascending to read the story chronologically.
+
+Finding
+From the PowerShell one‑liner:
+... Register-ScheduledTask Review -InputObject $D -Force;
+
 
 
 
