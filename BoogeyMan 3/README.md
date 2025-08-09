@@ -120,6 +120,17 @@ Finding
 From the PowerShell one‑liner:
 ... Register-ScheduledTask Review -InputObject $D -Force;
 
+## Task 5 - Identify C2 Connection from Payload Execution
+
+**Command / Query Used**
+```kql
+"review.dat" OR "rundll32.exe" OR "ProjectFinancialSummary_Q3"
+```
+
+![task5](./Screenshots/task5.png)  ![task5answer](./Screenshots/task5correct.png)
+
+
+
 
 
 
