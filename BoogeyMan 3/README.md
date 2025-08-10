@@ -112,7 +112,7 @@ xcopy.exe copying review.dat
 rundll32.exe executing review.dat,DllRegisterServer
 powershell.exe creating a scheduled task via Register-ScheduledTask
 
-What I looked at
+What I looked at :
 Added the columns: @timestamp, process.name, process.command_line, process.parent.executable, host.hostname.
 Sorted ascending to read the story chronologically.
 
@@ -141,7 +141,7 @@ By filtering for processes spawned by rundll32.exe, I was able to trace the post
 
 fodhelper.exe is a legitimate Windows binary that is often abused for UAC bypass because it automatically runs with elevated privileges without showing a User Account Control prompt. Attackers can exploit this by setting specific registry keys to point to malicious commands, which will then execute with admin rights.
 
-What I looked at
+What I looked at : 
 
 Added the columns: @timestamp, process.name, process.command_line, process.parent.name, host.hostname.
 
@@ -172,7 +172,7 @@ Source: GitHub repository for Mimikatz by gentilkiwi.
 
 Purpose: Mimikatz is a known tool for extracting plaintext passwords, hashes, PIN codes, and Kerberos tickets from memory.
 
-What I Looked At
+What I Looked At :
 
 Added the following fields for clarity:
 process.name, process.command_line, process.parent.command_line, process.parent.name, host.name.
@@ -181,6 +181,29 @@ Verified that the command clearly pointed to a credential dumping intent.
 
 Sorted logs chronologically to confirm this occurred after the attacker obtained high privilege access.
 
+## Task 8 – Username & Hash from Credential Dump
+
+**Command / Query Used**
+```kql
+process.command_line : "*sekurlsa::logonpasswords*" 
+OR process.command_line : "*mimikatz*" 
+OR powershell.file.script_block_text : "*sekurlsa::*" 
+OR powershell.file.script_block_text : "*NTLM*"
+```
+![task8](./Screenshots/task8.png)  ![task8answer](./Screenshots/task8correct.png)
+
+Breakdown :
+The attacker, after dumping credentials, attempted to use them for lateral movement.
+
+Filtering for sekurlsa::logonpasswords, mimikatz, and NTLM within both process.command_line and powershell.file.script_block_text revealed multiple entries containing credential data.
+
+NTLM hashes and corresponding usernames were visible directly in the powershell.file.script_block_text field.
+
+From these results, the username and hash pair used for lateral movement were extracted.
+
+What I Looked At:
+Columns: @timestamp, process.name, process.command_line, powershell.file.script_block_text, host.name.
+Sorted results by time to identify the most recent credential dump before lateral movement attempts.
 
 
 
