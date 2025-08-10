@@ -129,6 +129,26 @@ From the PowerShell one‑liner:
 
 ![task5](./Screenshots/task5.png)  ![task5answer](./Screenshots/task5correct.png)
 
+## Task 6 – UAC Bypass Process Name
+
+**Command / Query Used**
+```kql
+process.parent.name : "rundll32.exe"
+```
+![task6](./Screenshots/task6.png)  ![task6answer](./Screenshots/task6correct.png)
+
+By filtering for processes spawned by rundll32.exe, I was able to trace the post-execution activity of the malicious payload. Among these, fodhelper.exe appeared.
+
+fodhelper.exe is a legitimate Windows binary that is often abused for UAC bypass because it automatically runs with elevated privileges without showing a User Account Control prompt. Attackers can exploit this by setting specific registry keys to point to malicious commands, which will then execute with admin rights.
+
+What I looked at
+
+Added the columns: @timestamp, process.name, process.command_line, process.parent.name, host.hostname.
+
+Sorted by timestamp to view the sequence of execution events.
+
+Verified that fodhelper.exe was used directly after privilege escalation checks, confirming its role in the UAC bypass step.
+
 
 
 
