@@ -228,6 +228,7 @@ The cat command prints the script to console — perfect for quickly harvesting 
 ```kql
 host.name : "WKSTN-0051.quicklogistics.org" AND process.name : "powershell.exe"
 ```
+![task10](./Screenshots/task10.png)  ![task10answer](./Screenshots/task10correct.png)
 
 What I Did:
 From Task 9, I knew the attacker accessed the remote file IT_Automation.ps1.
