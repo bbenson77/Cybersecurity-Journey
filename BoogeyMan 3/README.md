@@ -222,6 +222,39 @@ The attacker then reads a file over a remote share via PowerShell’s PSDrive pr
 
 The cat command prints the script to console — perfect for quickly harvesting any embedded creds.
 
+# Task 10 - New Set of Credentials Discovered from Remote File
+
+**Command / Query Used**
+```kql
+host.name : "WKSTN-0051.quicklogistics.org" AND process.name : "powershell.exe"
+```
+
+What I Did:
+From Task 9, I knew the attacker accessed the remote file IT_Automation.ps1.
+The next logical step was to see what they did with it.
+By keeping the same filter for the CEO’s workstation (WKSTN-0051) and narrowing on powershell.exe, I scanned through the logs to locate any commands referencing the file contents.
+
+What I Found:
+Scrolling upward in the timeline revealed PowerShell commands that:
+
+Used the cat command to read the file’s content directly from the remote share.
+
+Contained a username and password inside the script, likely for automation purposes.
+
+Showed the credentials being stored into a $Credential object and passed into an Invoke-Command to execute code on another workstation (WKSTN-1327).
+
+Key Evidence:
+QUICKLOGISTICS\allan.smith:Tr!ckyP@ssw0rd987
+
+This pair represents the new credentials the attacker obtained from the remote file.
+
+The immediate follow-up commands show the attacker using these credentials for lateral movement.
+
+What I Looked At:
+
+Columns: @timestamp, process.name, process.command_line, process.parent.command_line, host.name.
+
+Sorted results in ascending order to see the exact sequence from reading the file → storing credentials → executing remote commands.
 
 
 
