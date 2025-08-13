@@ -213,7 +213,14 @@ Sorted results by time to identify the most recent credential dump before latera
 host.name : "WKSTN-0051.quicklogistics.org" and process.name : "powershell.exe" and *github*
 ```
 
+![task9](./Screenshots/task9.png)  ![task9answer](./Screenshots/task9correct.png)
 
+Breakdown (what’s happening under the hood)
+PowerView.ps1 is fetched from GitHub, then Invoke-ShareFinder runs to locate accessible SMB/DFS shares in the domain.
+
+The attacker then reads a file over a remote share via PowerShell’s PSDrive provider syntax (FileSystem::\\host\share\path\file), which is just another way to access a UNC path (equivalent to \\WKSTN-1327\ITFiles\IT_Automation.ps1).
+
+The cat command prints the script to console — perfect for quickly harvesting any embedded creds.
 
 
 
