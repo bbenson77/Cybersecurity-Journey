@@ -206,6 +206,12 @@ Columns: @timestamp, process.name, process.command_line, powershell.file.script_
 Sorted results by time to identify the most recent credential dump before lateral movement attempts.
 
 
+# Task 7 - Enumerate File Shares & Identify the Remote File Accessed 
+
+**Command / Query Used**
+```kql
+host.name : "WKSTN-0051.quicklogistics.org" and process.name : "powershell.exe" and *github*
+```
 
 
 
